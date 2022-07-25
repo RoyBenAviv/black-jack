@@ -1,0 +1,21 @@
+{
+  "name": "black-jack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.6.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "cardsJS": "^1.1.1"
+  }
+}

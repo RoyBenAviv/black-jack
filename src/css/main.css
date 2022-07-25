@@ -1,0 +1,48 @@
+body {
+    background-image: url(../images/blackjack-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+#table-game {
+    padding-top: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 170px;
+}
+
+#table-game .dealer, #table-game .player {
+    display: flex;
+    margin-bottom: 120px;
+}
+
+#table-game .player {
+    flex-direction: column;
+}
+
+#table-game .player .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#table-game .card:not(:first-child)  {
+    margin-left: -40px;
+}
+
+
+#table-game .dealer .back {
+    position: absolute;
+    left: 0;
+}
+
+#table-game .dealer .back-container {
+    position: relative;
+    height: 70px;
+    margin-left: -40px;
+}
