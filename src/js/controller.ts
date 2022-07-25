@@ -4,10 +4,13 @@ function renderTable() {
     for(let i = 0; i < PLAYER.hand.length; i++) {
         playerHTML +=  `<img class='card' src='images/cards/${PLAYER.hand[i]}.svg'>`
     }
-    playerHTML += `</div>`
-    playerHTML += `<div class="actions">
+    playerHTML += `</div>
+    <div class="actions">
     <button onclick="onHit()">HIT</button> <button onclick="onStand()">STAND</button> 
-    </div>`
+    </div>
+    <span>${PLAYER.sum}  ${filterAcesSum() < 6 && PLAYER.aceCount ? ' / ' + (PLAYER.sum - 10): ''}</span>
+    `
+    console.log("file: controller.ts -> line 12 -> renderTable -> PLAYER.aceCount", PLAYER.aceCount)
 
     let dealerHTML = ''
     for(let i = 0; i < DEALER.hand.length; i++) {
@@ -16,6 +19,8 @@ function renderTable() {
                                      </div>`
         else dealerHTML +=  `<img class='card' src='images/cards/${DEALER.hand[i]}.svg'>`
     }
+    dealerHTML +=     `<span>${DEALER.sum}</span>
+    `
     let elPlayer: HTMLElement | null = document.querySelector('.player')
     let elDealer: HTMLElement | null = document.querySelector('.dealer')
 

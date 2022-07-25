@@ -14,11 +14,13 @@ const CARD_DECK = ["2C", "2D", "2H", "2S",
     "AC", "AD", "AH", "AS",];
 const PLAYER = {
     hand: [],
-    sum: 0
+    sum: 0,
+    aceCount: 0
 };
 const DEALER = {
     hand: [],
     sum: 0,
+    aceCount: 0
 };
 const GAME = {
     cardFlipped: true,
@@ -30,13 +32,6 @@ function init() {
     firstDeal();
     renderTable();
 }
-function dealOneCard() {
-    const chosenCard = CARD_DECK.pop();
-    return chosenCard;
-}
-function shuffleDeck() {
-    CARD_DECK.sort(() => Math.random() - 0.5);
-}
 function firstDeal() {
     for (let i = 0; i < 2; i++) {
         DEALER.hand.push(dealOneCard());
@@ -47,33 +42,47 @@ function firstDeal() {
 function calculateHands() {
     DEALER.sum = DEALER.hand.reduce((sum, card) => {
         if (GAME.cardFlipped)
-            return checkCardWorth(DEALER.hand[0][0]);
-        sum += checkCardWorth(card[0]);
+            return checkCardWorth(DEALER.hand[0][0], DEALER);
+        sum += checkCardWorth(card[0], DEALER);
         return sum;
     }, 0);
+    reSumAces(DEALER);
     console.log("file: main.ts -> line 58 -> DEALER.sum=DEALER.hand.reduce -> DEALER", DEALER);
     PLAYER.sum = PLAYER.hand.reduce((sum, card) => {
-        sum += checkCardWorth(card[0]);
+        sum += checkCardWorth(card[0], PLAYER);
         return sum;
     }, 0);
+    reSumAces(PLAYER);
     console.log("file: main.ts -> line 63 -> PLAYER.sum=PLAYER.hand.reduce -> PLAYER", PLAYER);
     checkWinner();
 }
-function checkCardWorth(value) {
+function checkCardWorth(value, member) {
     let cardWorth = 0;
     if (value === 'K' || value === 'Q' || value === 'J' || value === '1')
         cardWorth = 10;
     else if (value === 'A') {
-        cardWorth = GAME.cardFlipped ? 1 : 11;
+        cardWorth = 11;
     }
     else
         cardWorth = Number(value);
     return cardWorth;
 }
+function reSumAces(member) {
+    var i = 0;
+    member.aceCount = member.hand.filter((card) => card[0] === 'A').length;
+    if (!member.aceCount)
+        return;
+    while (i <= member.aceCount) {
+        if (member.sum > 21)
+            member.sum -= 10;
+        console.log("file: main.ts -> line 87 -> reSumAces ->  member.sum", member.sum);
+        i++;
+    }
+}
 function onHit() {
     PLAYER.hand.push(dealOneCard());
-    renderTable();
     calculateHands();
+    renderTable();
 }
 function onStand() {
     GAME.cardFlipped = false;
@@ -86,4 +95,5 @@ function onStand() {
     }
 }
 function checkWinner() {
+    // if(PLAYER.sum > 21)
 }
