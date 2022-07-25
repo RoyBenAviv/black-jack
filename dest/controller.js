@@ -7,8 +7,9 @@ function renderTable() {
     playerHTML += `</div>
     <div class="actions">
     <button onclick="onHit()">HIT</button> <button onclick="onStand()">STAND</button> 
+    ${checkSplitBtn(PLAYER) ? '<button onclick="onSetSplitMode()">SPLIT</button>' : ''}
     </div>
-    <span>${PLAYER.sum}  ${filterAcesSum() < 6 && PLAYER.aceCount ? ' / ' + (PLAYER.sum - 10) : ''}</span>
+    <span>${PLAYER.sum}  ${filterAcesSum(PLAYER) < 6 && PLAYER.aceCount ? ' / ' + (PLAYER.sum - 10) : ''}</span>
     `;
     console.log("file: controller.ts -> line 12 -> renderTable -> PLAYER.aceCount", PLAYER.aceCount);
     let dealerHTML = '';
