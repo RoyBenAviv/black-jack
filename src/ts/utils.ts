@@ -1,4 +1,5 @@
-function dealOneCard(): string {
+function drawCard(): string {
+
     const chosenCard: string | undefined = CARD_DECK.pop()
     
     return chosenCard!

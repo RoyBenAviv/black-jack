@@ -1,50 +1,25 @@
 "use strict";
-const CARD_DECK = ["2C", "2D", "2H", "2S",
-    "3C", "3D", "3H", "3S",
-    "3C", "3D", "3H", "3S",
-    "3C", "3D", "3H", "3S",
-    "3C", "3D", "3H", "3S",
-    "3C", "3D", "3H", "3S",
-    "3C", "3D", "3H", "3S",
-    "9C", "9D", "9H", "9S",
-    "10C", "10D", "10H", "10S",
-    "JC", "JD", "JH", "JS",
-    "QC", "QD", "QH", "QS",
-    "KC", "KD", "KH", "KS",
-    "AC", "AD", "AH", "AS",];
-const PLAYER = {
-    hand: [],
-    sum: 0,
-    aceCount: 0
-};
-const DEALER = {
-    hand: [],
-    sum: 0,
-    aceCount: 0
-};
-const GAME = {
-    cardFlipped: true,
-    gameOver: false,
-    splitMode: false
-};
-init();
 function init() {
+    console.log('this', this);
     shuffleDeck();
     firstDeal();
     renderTable();
+    renderCards();
 }
 function firstDeal() {
     for (let i = 0; i < 2; i++) {
-        DEALER.hand.push(dealOneCard());
-        PLAYER.hand.push(dealOneCard());
+        DEALER.hand.push(drawCard());
+        PLAYER.hand.push(drawCard());
     }
     calculateHands();
-    if (GAME.splitMode) {
-        console.log('hi');
-    }
 }
 function onSetSplitMode() {
     GAME.splitMode = true;
+    PLAYER.split.splitedHands = [
+        [PLAYER.hand.shift(), drawCard()],
+        [PLAYER.hand.shift(), drawCard()],
+    ];
+    renderTable();
 }
 function calculateHands() {
     DEALER.sum = DEALER.hand.reduce((sum, card) => {
@@ -54,13 +29,13 @@ function calculateHands() {
         return sum;
     }, 0);
     reSumAces(DEALER);
-    console.log("file: main.ts -> line 58 -> DEALER.sum=DEALER.hand.reduce -> DEALER", DEALER);
+    console.log('file: main.ts -> line 58 -> DEALER.sum=DEALER.hand.reduce -> DEALER', DEALER);
     PLAYER.sum = PLAYER.hand.reduce((sum, card) => {
         sum += checkCardWorth(card[0], PLAYER);
         return sum;
     }, 0);
     reSumAces(PLAYER);
-    console.log("file: main.ts -> line 63 -> PLAYER.sum=PLAYER.hand.reduce -> PLAYER", PLAYER);
+    console.log('file: main.ts -> line 63 -> PLAYER.sum=PLAYER.hand.reduce -> PLAYER', PLAYER);
     checkWinner();
 }
 function checkCardWorth(value, member) {
@@ -82,25 +57,43 @@ function reSumAces(member) {
     while (i <= member.aceCount) {
         if (member.sum > 21)
             member.sum -= 10;
-        console.log("file: main.ts -> line 87 -> reSumAces ->  member.sum", member.sum);
         i++;
     }
 }
 function onHit() {
-    PLAYER.hand.push(dealOneCard());
+    PLAYER.hand.push(drawCard());
     calculateHands();
     renderTable();
 }
 function onStand() {
-    GAME.cardFlipped = false;
-    calculateHands();
-    renderTable();
-    while (DEALER.sum < 17) {
-        DEALER.hand.push(dealOneCard());
+    if (GAME.splitMode) {
+        PLAYER.split.currentHand++;
+        renderTable();
+    }
+    else {
+        console.log('hhh');
+        GAME.cardFlipped = false;
         calculateHands();
         renderTable();
+        while (DEALER.sum < 17) {
+            DEALER.hand.push(drawCard());
+            calculateHands();
+            renderTable();
+        }
     }
 }
 function checkWinner() {
-    // if(PLAYER.sum > 21)
+    if (GAME.cardFlipped && PLAYER.sum > 21)
+        GAME.endOfGame.winner = "dealer";
+    if (!GAME.cardFlipped && DEALER.sum <= 21 && DEALER.sum > PLAYER.sum)
+        GAME.endOfGame.winner = "dealer";
+    if (PLAYER.sum === 21 && PLAYER.aceCount === 1) {
+        GAME.endOfGame.winner = "player";
+        GAME.endOfGame.blackJack = true;
+    }
+    else if (DEALER.sum > 21)
+        GAME.endOfGame.winner = "player";
+    if (!GAME.cardFlipped && PLAYER.sum > DEALER.sum && PLAYER.sum < 21)
+        GAME.endOfGame.winner = "player";
+    // else if (DEALER.sum > 16 && PLAYER.sum > 16 && PLAYER.sum < 21) GAME.endOfGame.winner = "player"    
 }

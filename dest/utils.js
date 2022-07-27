@@ -1,5 +1,5 @@
 "use strict";
-function dealOneCard() {
+function drawCard() {
     const chosenCard = CARD_DECK.pop();
     return chosenCard;
 }

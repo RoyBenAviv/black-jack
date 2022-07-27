@@ -1,3 +1,6 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 body {
     background-image: url(../images/blackjack-background.jpg);
     background-repeat: no-repeat;
@@ -22,6 +25,11 @@ body {
 }
 
 #table-game .player {
+    gap: 80px;
+}
+
+#table-game .player .hands {
+    display: flex;
     flex-direction: column;
 }
 
@@ -30,6 +38,7 @@ body {
     gap: 10px;
     justify-content: center;
 }
+
 
 #table-game .card:not(:first-child)  {
     margin-left: -40px;
@@ -46,3 +55,26 @@ body {
     height: 70px;
     margin-left: -40px;
 }
+
+.hide {
+    display: none;
+}
+
+
+.menu {
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu .logo {
+    width: 20%;
+}
+
+.menu .game-start-actions {
+    display: flex;
+    flex-direction: column;
+}
+
