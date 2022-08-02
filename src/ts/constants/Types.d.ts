@@ -1,21 +1,24 @@
 interface Player {
     hand: string[],
-    sum: number,
+    handSum: number,
     aceCount: number,
-    split: any
+    totalBalance: number,
+    currentBet: number
+    split: any,
 }
 
 interface Dealer {
     hand: string[],
-    sum: number,
+    handSum: number,
     aceCount: number
 }
 
 interface Game {
     cardFlipped: boolean,
     endOfGame: {
-      winner: undefined | "player" | "dealer",
+      winner: undefined | "player" | "dealer" | "push",
       blackJack: boolean
     },
     splitMode: boolean,
+    firstDeal: boolean
 }

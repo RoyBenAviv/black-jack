@@ -1,31 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <script>var exports = {};</script>
-  <script  src="../dest/controller.js" defer></script>
-  <script  src="../dest/utils.js" defer></script>
-  <script  src="../dest/main.js" defer></script>
-  <script  src="../dest/data/data.js" defer></script>
-  <meta charset="UTF-8">
-  <link href="css/main.css" rel="stylesheet" type="text/css">
-  <link href="css/cards.css" rel="stylesheet" type="text/css">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body >
-  <div class="menu">
-    <img class="logo" src="images/logo.png" alt="logo"/>
-    <div class="game-start-actions">
-    <button onclick="init(this)">Play against dealer</button>
-    <button>Play with friend</button>
-    </div>
-  </div>
-  <main id="table-game">
-      <div class="dealer"></div>
-      <div class="player"></div>
+  <head>
+    <script>
+      var exports = {}
+    </script>
+    <script src="../dest/controller.js" defer></script>
+    <script src="../dest/utils.js" defer></script>
+    <script src="../dest/main.js" defer></script>
+    <script src="../dest/data/data.js" defer></script>
+    <script src="../dest/services/dnd.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <meta charset="UTF-8" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+    <link href="css/cards.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black Jack</title>
+  </head>
+  <body>
+    <section class="menu">
+      <img class="logo" src="assets/images/logo.png" alt="logo" />
+      <div class="game-start-actions">
+        <button onclick="init()">Play against dealer</button>
+        <button>Play with friend</button>
+      </div>
+    </section>
+    <main id="table-game">
+      <div class="dealer-container"></div>
+      <div class="player-container"></div>
+    </main>
 
-  </main>
-<audio class="audio"></audio>
-</body>
+
+    <section style="display: none" class="end-game">
+      <h2>Winner: <span></span></h2>
+    </section>
+    <!-- <section class="history">
+        <ul>
+        </ul>
+    </section> -->
+    <section class="player-info">
+      <div class="total"><p>Total Balance:</p> <span>500$</span></div>
+      <div class="bet"><p>Bet:</p> <span>0$</span></div>
+    </section>
+
+    <div  style="display: none" class="game-tokens">
+      <h2>Place Your bets!</h2>
+      <div class="tokens">
+        <img class="tokens-draggable" data-chip="5" src="assets/images/chips/chip-5.png" />
+        <img class="tokens-draggable" data-chip="10" src="assets/images/chips/chip-10.png" />
+        <img class="tokens-draggable" data-chip="15" src="assets/images/chips/chip-15.png" />
+        <img class="tokens-draggable" data-chip="50" src="assets/images/chips/chip-50.png" />
+      </div>
+      <button onclick="startGame()">DEAL</button>
+    </div>
+
+    <div class="hand-tokens">
+    </div>
+
+  </body>
 </html>

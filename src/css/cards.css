@@ -5,6 +5,7 @@ img.card, img.back {
 	border: 0;
 	vertical-align: initial;
 	box-sizing: initial;
+	user-select: none;
 }
 
 
