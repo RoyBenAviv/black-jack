@@ -21,9 +21,9 @@ function renderTable() {
                 playerHTML += '</div>';
                 playerHTML += `
       <div class="${i === PLAYER.split.currentHand ? 'actions' : 'hide'}">
-      <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'block'}" onclick="onHit()">HIT</button> <button onclick="onStand()">STAND</button> 
+      <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'flex'}" onclick="onHit()"> <img src="assets/images/hit.png" alt="hit"/> HIT</button> <button onclick="onStand()"> <img src="assets/images/stand.png" alt="stand"/> STAND</button> 
       </div>
-      <span class="">${displaySplitSum(i)}</span>
+      <span class="player sum two-hands">${displaySplitSum(i)}</span>
       `;
                 playerHTML += '</div>';
             }
@@ -37,12 +37,13 @@ function renderTable() {
                 }
                 playerHTML += '</div>';
                 playerHTML += `<div class="${GAME.cardFlipped ? 'actions' : 'hide'}">
-            <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'block'}" onclick="onHit()">HIT</button> 
-            <button onclick="onStand()">STAND</button> 
-             <button style="display: ${checkSplitBtn(PLAYER) ? 'block' : 'none'}" onclick="onSetSplitMode()">SPLIT</button>
+            <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'flex'}" onclick="onHit()"> <img src="assets/images/hit.png" alt="hit"/> HIT</button> 
+            <button onclick="onStand()"> <img src="assets/images/stand.png" alt="stand"/> STAND</button> 
+             <button style="display: ${checkSplitBtn(PLAYER) ? 'flex' : 'none'}" onclick="onSetSplitMode()"> <img src="assets/images/split.png" alt="split"/> SPLIT</button>
             </div>
-            <span class="player sum">${displaySum()}</span>
-            </div>`;
+            <span class="player sum one-hand">${displaySum()}</span>
+            `;
+                playerHTML += '</div>';
             }
         }
         let dealerHTML = '';
@@ -56,7 +57,7 @@ function renderTable() {
             else
                 dealerHTML += `<img class='card' src='assets/images/cards/${DEALER.hand[i]}.svg'>`;
         }
-        dealerHTML += `<span class="dealer sum">${DEALER.handSum}</span>`;
+        dealerHTML += `<span class="dealer sum one-hand">${DEALER.handSum}</span>`;
         let elPlayer = document.querySelector('.player-container');
         let elDealer = document.querySelector('.dealer-container');
         elPlayer.innerHTML = playerHTML;
@@ -65,21 +66,23 @@ function renderTable() {
 }
 function renderCards() {
     let elPlayer = document.querySelector('.cards');
+    let elHands = document.querySelector('.hands');
     (function () {
         let i = 0;
         const interval = setInterval(function () {
             elPlayer.innerHTML += `<img class='card' src='assets/images/cards/${PLAYER.hand[i]}.svg'>`;
             new Audio('assets/audio/card-draw.mp3').play();
             i += 1;
+            elPlayer.innerHTML += '</div>';
             if (i >= PLAYER.hand.length) {
                 clearInterval(interval);
-                elPlayer.innerHTML += `<div class="${GAME.cardFlipped ? 'actions' : 'hide'}">
-              <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'block'}" onclick="onHit()">HIT</button> 
-              <button onclick="onStand()">STAND</button> 
-               <button style="display: ${checkSplitBtn(PLAYER) ? 'block' : 'none'}" onclick="onSetSplitMode()">SPLIT</button>
-              </div>
-              <span class="player sum">${displaySum()}</span>
-              </div>`;
+                elHands.innerHTML += `<div class="${GAME.cardFlipped ? 'actions' : 'hide'}">
+         <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'flex'}" onclick="onHit()"> <img src="assets/images/hit.png" alt="hit"/> HIT</button> 
+         <button onclick="onStand()"> <img src="assets/images/stand.png" alt="stand"/> STAND</button> 
+         <button style="display: ${checkSplitBtn(PLAYER) ? 'flex' : 'none'}" onclick="onSetSplitMode()"> <img src="assets/images/split.png" alt="split"/> SPLIT</button>
+         </div>
+         <span class="player sum one-hand">${displaySum()}</span>`;
+                elHands.innerHTML += '</div>';
             }
         }, 600);
     })();
@@ -90,10 +93,14 @@ function hideMenu() {
 }
 function renderGameTokens() {
     const elGameTokens = document.querySelector('.game-tokens');
+    const elHandTokens = document.querySelector('.hand-tokens');
+    elHandTokens.classList.add('dnd');
     elGameTokens.style.display = 'flex';
 }
 function hideGameTokens() {
     const elGameTokens = document.querySelector('.game-tokens');
+    const elHandTokens = document.querySelector('.hand-tokens');
+    elHandTokens.classList.remove('dnd');
     elGameTokens.style.display = 'none';
 }
 function renderBalance(player) {

@@ -1,28 +1,39 @@
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 @font-face {
-    font-family: black-jack;
-    src: url('../assets/fonts/blackjack.otf');
+  font-family: black-jack;
+  src: url('../assets/fonts/blackjack.otf');
 }
 
 body {
-    background-image: url(../assets/images/blackjack-background.jpg);
-    background-repeat: no-repeat;
-    background-position: top;
-    height: 100vh;
-    overflow-y: hidden;
-    font-family: black-jack;
+  background-image: url(../assets/images/blackjack-background.jpg);
+  background-repeat: no-repeat;
+  background-position: top;
+  height: 100vh;
+  overflow-y: hidden;
+  font-family: black-jack;
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+  border: none;
 }
 
 #table-game {
-    padding-top: 170px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 170px;
+  padding-top: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 170px;
 }
 
 /* @media (max-width: 1400px) {
@@ -32,16 +43,15 @@ body {
     }
 } */
 
-
-#table-game .dealer-container, #table-game .player-container {
-    display: flex;
-    margin-bottom: 75px;
-    position: relative;
+#table-game .dealer-container,
+#table-game .player-container {
+  display: flex;
+  margin-bottom: 75px;
+  position: relative;
 }
 
 #table-game .dealer-container {
-    margin-top: 40px;
-
+  margin-top: 40px;
 }
 
 /* @media (max-width: 1600px) {
@@ -52,203 +62,267 @@ body {
 } */
 
 #table-game .player-container {
-    gap: 80px;
+  gap: 80px;
 }
 
 #table-game .player-container .hands {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 #table-game .player-container .actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
 }
 
-
-#table-game .card:not(:first-child)  {
-    margin-left: -40px;
+#table-game .player-container .actions button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
 }
 
+#table-game .player-container .actions button:nth-child(1) {
+  background-color: #29a929;
+}
+#table-game .player-container .actions button:nth-child(2) {
+  background-color: rgb(255, 43, 43);
+}
+#table-game .player-container .actions button:nth-child(3) {
+  background-color: yellow;
+}
+
+#table-game .player-container .actions button img {
+  width: 20px;
+}
+
+#table-game .card:not(:first-child) {
+  margin-left: -40px;
+}
 
 #table-game .dealer-container .back {
-    position: absolute;
-    left: 0;
+  position: absolute;
+  left: 0;
 }
 
 #table-game .dealer-container .back-container {
-    position: relative;
-    height: 70px;
-    margin-left: -40px;
+  position: relative;
+  height: 70px;
+  margin-left: -40px;
 }
 
 #table-game .sum {
-    border-radius: 50px;
-    background-color: white;
-    width: 60px;
-    height: 20px;
-    display: flex;
-    padding: 15px 0;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    font-size: 20px;
-    letter-spacing: -1px;
-    font-weight: bold;
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translate(-50%);
+  border-radius: 50px;
+  background-color: white;
+  width: 60px;
+  height: 20px;
+  display: flex;
+  padding: 15px 0;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: 20px;
+  letter-spacing: -1px;
+  font-weight: bold;
+  position: absolute;
+  transform: translate(-50%);
+  top: -40px;
+  left: 50%;
 }
 
 #table-game .player.sum {
-    background-color: rgb(228, 228, 85);
+  background-color: rgb(228, 228, 85);
 }
 
 #table-game .player.sum img {
-    width: 30px;
+  width: 30px;
 }
-
 
 .hide {
-    display: none;
+  display: none;
 }
-
 
 .menu {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-
 .menu .logo {
-    display: flex;
-    width: 50%;
-    margin: auto;
+  display: flex;
+  width: 50%;
+  margin: auto;
 }
 
 .menu .game-start-actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .menu .game-start-actions > button {
-    width: 200px;
-    padding: 10px 0;
-    cursor: pointer;
-    font-family: inherit;
-    background-color: #2e2e2e;
-    color: #ff7657;
-    border-radius: 4px;
-    border-color: #d04527;
-    transition: background-color 0.2s ease-in-out;
+  width: 200px;
+  color: #ff7657;
+  background-color: #2e2e2e;
+  padding: 10px 0;
+  border: 1px solid #d04527;
 }
 
 .menu .game-start-actions > button:hover {
-    background-color: black;
+  background-color: black;
 }
 
 .menu .game-start-actions > button:nth-child(1) {
-
 }
 
 .history {
-    width: 400px;
-    height: 200px;
-    background-color: rgba(0, 0, 0, 0.521);
-    position: absolute;
-    left: 0;
-    top: 0;
-    border-bottom-right-radius: 10px;
+  width: 400px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.521);
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-bottom-right-radius: 10px;
 }
 
 .hand-tokens {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translate(-50%);
-    width: 40px;
-    height: 40px;
-    border: 2px solid whitesmoke;
-    border-radius: 50%;
-    margin-top: 50px;
-    aspect-ratio: 1/0.5;
-
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 40px;
+  height: 40px;
+  border: 2px solid whitesmoke;
+  border-radius: 50%;
+  aspect-ratio: 1/0.5;
 }
 
 .hand-tokens img {
-    margin: 0 -15px;
-    width: 40px;
-    height: 40px;
+  margin: 0 -15px;
+  width: 40px;
+  height: 40px;
 }
 
 .game-tokens {
-    position: fixed;
-    flex-direction: column;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: fixed;
+  align-items: center;
+  flex-direction: column;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.game-tokens button {
+    margin-top: 20px;
+    padding: 5px 30px;
+    color: #ff7657;
+    background-color: #2e2e2e;
+    border: 1px solid #d04527;
+}
+
+.game-tokens button span {
+    font-family: fantasy;
+    margin-left: 3px;
 }
 
 .game-tokens h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .game-tokens .tokens {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .game-tokens .tokens img {
-    width: 40px;
+  width: 40px;
 }
 
 .tokens-draggable:hover {
-    cursor: url(../assets/images/grab.cur), auto;
+  cursor: url(../assets/images/grab.cur), auto;
 }
 
 .tokens-draggable {
-    cursor: move;
-    cursor: -webkit-grabbing;
+  cursor: move;
+  cursor: -webkit-grabbing;
 }
 
 .hand-tokens .tokens-draggable {
-    cursor: inherit;
+  cursor: inherit;
 }
 
 .player-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    gap: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  gap: 50px;
 }
 
 .player-info div {
-    background-color: rgba(0, 0, 0, 0.521);
-    padding: 0 20px;
-    color: rgb(228, 228, 85);
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  background-color: rgba(0, 0, 0, 0.521);
+  padding: 0 20px;
+  color: rgb(228, 228, 85);
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .end-game {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .end-game h2 {
-    user-select: none;
+  user-select: none;
+}
+
+.hand-tokens.dnd {
+  box-shadow: 0 0 0 0 rgb(255, 255, 255);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+.hand-tokens.dnd::after,
+.hand-tokens.dnd::before {
+  position: absolute;
+  white-space: nowrap;
+  top: 5px;
+}
+.hand-tokens.dnd::after {
+  content: '← Drag here';
+  left: 50px;
+}
+
+.hand-tokens.dnd::before {
+  content: '→';
+  right: 50px;
 }

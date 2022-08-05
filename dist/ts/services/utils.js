@@ -18,14 +18,14 @@ function checkSplitBtn(player) {
 }
 function displaySum() {
     if (!GAME.endOfGame.blackJack)
-        return `${PLAYER.handSum}  ${filterAcesSum(PLAYER.hand) < 10 && PLAYER.aceCount ? ' / ' + (PLAYER.handSum - 10) : ''}`;
+        return `${PLAYER.handSum}  ${(filterAcesSum(PLAYER.hand) < 10 && PLAYER.aceCount && GAME.cardFlipped) ? ' / ' + (PLAYER.handSum - 10) : ''}`;
     else
         return '<img src="assets/images/21.webp" alt="21"/>';
 }
 function displaySplitSum(currHand) {
     if (!GAME.endOfGame.blackJack) {
         console.log(' filterAcesSum(PLAYER.split.splitedHands[currHand]', filterAcesSum(PLAYER.split.splitedHands[currHand]));
-        return `${PLAYER.split.splitSum[currHand]} ${filterAcesSum(PLAYER.split.splitedHands[currHand]) < 10 && PLAYER.split.aceCount[currHand] ? ' / ' + (PLAYER.split.splitSum[currHand] - 10) : ''}`;
+        return `${PLAYER.split.splitSum[currHand]} ${(filterAcesSum(PLAYER.split.splitedHands[currHand]) < 10 && PLAYER.split.aceCount[currHand] && GAME.cardFlipped) ? ' / ' + (PLAYER.split.splitSum[currHand] - 10) : ''}`;
     }
     else
         return '<img src="assets/images/21.webp" alt="21"/>';
