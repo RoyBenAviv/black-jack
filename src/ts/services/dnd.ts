@@ -1,11 +1,11 @@
 
 const draggables: NodeListOf<Element> = document.querySelectorAll('.tokens-draggable');
-const elDragContainer: Element = document.querySelector('.hand-tokens');
-const elTokens: Element = document.querySelector('.tokens');
-
+const elDragContainer: HTMLElement = document.querySelector('.hand-tokens');
+const elTokens: HTMLElement = document.querySelector('.tokens');
 Sortable.create(elTokens, {
     handle: '.tokens-draggable',
     group: {
+        name: 'tokens',
         pull: 'clone',
         put: false
     },
@@ -24,6 +24,7 @@ Sortable.create(elTokens, {
   Sortable.create(elDragContainer, {
     handle: '.tokens-draggable',
     group: {
+        name: 'hand',
         pull: 'clone',
         put: true
     },

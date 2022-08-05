@@ -1,13 +1,19 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: black-jack;
+    src: url('../assets/fonts/blackjack.otf');
+}
+
 body {
     background-image: url(../assets/images/blackjack-background.jpg);
     background-repeat: no-repeat;
     background-position: top;
     height: 100vh;
     overflow-y: hidden;
-    font-family: cursive;
+    font-family: black-jack;
 }
 
 #table-game {
@@ -19,12 +25,12 @@ body {
     gap: 170px;
 }
 
-@media (max-width: 1400px) {
+/* @media (max-width: 1400px) {
     #table-game {
         gap: 80px;
     
     }
-}
+} */
 
 
 #table-game .dealer-container, #table-game .player-container {
@@ -38,12 +44,12 @@ body {
 
 }
 
-@media (max-width: 1600px) {
+/* @media (max-width: 1600px) {
     #table-game .dealer-container {
         margin-top: 0;
     
     }
-}
+} */
 
 #table-game .player-container {
     gap: 80px;
@@ -87,10 +93,11 @@ body {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 20px;
+    letter-spacing: -1px;
     font-weight: bold;
     position: absolute;
-    top: -35px;
+    top: -40px;
     left: 50%;
     transform: translate(-50%);
 }
@@ -126,6 +133,29 @@ body {
 .menu .game-start-actions {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu .game-start-actions > button {
+    width: 200px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-family: inherit;
+    background-color: #2e2e2e;
+    color: #ff7657;
+    border-radius: 4px;
+    border-color: #d04527;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.menu .game-start-actions > button:hover {
+    background-color: black;
+}
+
+.menu .game-start-actions > button:nth-child(1) {
+
 }
 
 .history {
@@ -217,4 +247,8 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.end-game h2 {
+    user-select: none;
 }

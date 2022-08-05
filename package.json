@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
     "start": "tsc --watch"
   },
   "keywords": [],
@@ -14,8 +15,5 @@
   "devDependencies": {
     "@types/node": "^18.6.0",
     "typescript": "^4.7.4"
-  },
-  "dependencies": {
-    "cardsJS": "^1.1.1"
   }
 }

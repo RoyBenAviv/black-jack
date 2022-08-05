@@ -4,6 +4,7 @@ const elTokens = document.querySelector('.tokens');
 Sortable.create(elTokens, {
     handle: '.tokens-draggable',
     group: {
+        name: 'tokens',
         pull: 'clone',
         put: false
     },
@@ -20,6 +21,7 @@ Sortable.create(elTokens, {
 Sortable.create(elDragContainer, {
     handle: '.tokens-draggable',
     group: {
+        name: 'hand',
         pull: 'clone',
         put: true
     },

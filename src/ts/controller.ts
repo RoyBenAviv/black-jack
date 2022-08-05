@@ -1,3 +1,5 @@
+
+
 async function renderTable() {
   let playerHTML: string = ''
   if (GAME.splitMode) {
@@ -13,7 +15,7 @@ async function renderTable() {
       <div class="${i === PLAYER.split.currentHand ? 'actions' : 'hide'}">
       <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'block'}" onclick="onHit()">HIT</button> <button onclick="onStand()">STAND</button> 
       </div>
-      <span></span>
+      <span class="">${displaySplitSum(i)}</span>
       `
       playerHTML += '</div>'
     }
@@ -76,7 +78,7 @@ function renderCards() {
 
 function hideMenu() {
   const elMenu: HTMLElement = document.querySelector('.menu')
-  elMenu?.style.display = 'none'
+  elMenu.style.display = 'none'
 }
 
 function renderGameTokens() {
@@ -107,6 +109,4 @@ function renderEndGame() {
   // actionsEl.classList.add('hide')
   // actionsEl.classList.remove('actions')
   winnerEl.innerHTML += GAME.endOfGame.winner
-
-
 }

@@ -23,7 +23,7 @@ function renderTable() {
       <div class="${i === PLAYER.split.currentHand ? 'actions' : 'hide'}">
       <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'block'}" onclick="onHit()">HIT</button> <button onclick="onStand()">STAND</button> 
       </div>
-      <span></span>
+      <span class="">${displaySplitSum(i)}</span>
       `;
                 playerHTML += '</div>';
             }
@@ -86,7 +86,7 @@ function renderCards() {
 }
 function hideMenu() {
     const elMenu = document.querySelector('.menu');
-    elMenu === null || elMenu === void 0 ? void 0 : elMenu.style.display = 'none';
+    elMenu.style.display = 'none';
 }
 function renderGameTokens() {
     const elGameTokens = document.querySelector('.game-tokens');
