@@ -17,6 +17,7 @@ function checkSplitBtn(player) {
     return player.hand[0][0] === player.hand[1][0] && GAME.cardFlipped && GAME.firstDeal ? true : false;
 }
 function displaySum() {
+    console.log("file: utils.ts -> line 26 -> displaySum -> GAME.endOfGame.blackJack", GAME.endOfGame.blackJack);
     if (!GAME.endOfGame.blackJack)
         return `${PLAYER.handSum}  ${(filterAcesSum(PLAYER.hand) < 10 && PLAYER.aceCount && GAME.cardFlipped) ? ' / ' + (PLAYER.handSum - 10) : ''}`;
     else

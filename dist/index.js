@@ -15,6 +15,10 @@ function firstDeal() {
         PLAYER.hand.push(drawCard());
     }
     calculateHands();
+    const winner = checkWinner();
+    if (winner) {
+        endGame(winner);
+    }
 }
 function onSetSplitMode() {
     GAME.splitMode = true;
@@ -149,13 +153,19 @@ function fullStandAction() {
     }
 }
 function checkWinner() {
+    console.log('file: index.ts -> line 166 -> checkWinner -> DEALER.aceCount', DEALER.aceCount);
+    console.log('file: index.ts -> line 166 -> checkWinner -> PLAYER.aceCount', PLAYER.aceCount);
+    console.log('file: index.ts -> line 166 -> checkWinner -> PLAYER.handSum', PLAYER.handSum);
+    console.log('file: index.ts -> line 169 -> checkWinner -> DEALER.handSum', DEALER.handSum);
+    console.log('file: index.ts -> line 171 -> checkWinner -> GAME.endOfGame.blackJack', GAME.endOfGame.blackJack);
+    console.log('file: index.ts -> line 178 -> checkWinner -> PLAYER.hand.length', PLAYER.hand.length);
     if (GAME.splitMode) {
     }
     else {
         if (GAME.cardFlipped) {
             if (PLAYER.handSum > 21)
                 return 'dealer';
-            if (PLAYER.handSum === 21 && PLAYER.aceCount === 1 && !DEALER.aceCount) {
+            if (PLAYER.handSum === 21 && PLAYER.aceCount === 1 && DEALER.handSum < 10) {
                 GAME.endOfGame.blackJack = true;
                 return 'player';
             }
@@ -165,9 +175,16 @@ function checkWinner() {
         else {
             if (DEALER.handSum <= 21 && DEALER.handSum > PLAYER.handSum)
                 return 'dealer';
-            if (DEALER.handSum > 21)
+            if (PLAYER.handSum === 21 && PLAYER.hand.length === 2 && PLAYER.aceCount === 1 && (DEALER.hand.length > 2 || DEALER.handSum !== 21 || !DEALER.aceCount)) {
+                GAME.endOfGame.blackJack = true;
+                console.log('hiz');
                 return 'player';
-            if (PLAYER.handSum > DEALER.handSum && PLAYER.handSum < 21)
+            }
+            else if (PLAYER.handSum > DEALER.handSum && PLAYER.handSum <= 21) {
+                console.log('meowwowow');
+                return 'player';
+            }
+            if (DEALER.handSum > 21)
                 return 'player';
             if (DEALER.handSum >= 17 && DEALER.handSum === PLAYER.handSum)
                 return 'push';
@@ -184,9 +201,12 @@ function checkWinner() {
 function endGame(winner) {
     console.log('file: main.ts -> line 118 -> endGame -> winner', winner);
     GAME.endOfGame.winner = winner;
-    // if(GAME.endOfGame.winner === "player" && GAME.endOfGame.blackJack) PLAYER.totalBalance += PLAYER.currentBet * 2.5
-    // else if(GAME.endOfGame.winner === "player") PLAYER.totalBalance += PLAYER.currentBet * 2
-    // else if(GAME.endOfGame.winner === "push") PLAYER.totalBalance += PLAYER.currentBet
+    if (GAME.endOfGame.blackJack)
+        PLAYER.totalBalance += PLAYER.currentBet * 2.5;
+    else if (GAME.endOfGame.winner === "player" && !GAME.endOfGame.blackJack)
+        PLAYER.totalBalance += PLAYER.currentBet * 2;
+    else if (GAME.endOfGame.winner === "push")
+        PLAYER.totalBalance += PLAYER.currentBet;
     renderBalance(PLAYER);
     renderEndGame();
 }

@@ -104,6 +104,8 @@ function hideGameTokens() {
     elGameTokens.style.display = 'none';
 }
 function renderBalance(player) {
+    console.log("file: controller.ts -> line 104 -> renderBalance -> player.totalBalance", player.totalBalance);
+    console.log("file: controller.ts -> line 106 -> renderBalance -> player.currentBet", player.currentBet);
     const totalBalanceEl = document.querySelector('.total span');
     const currentBetEl = document.querySelector('.bet span');
     totalBalanceEl.innerHTML = `${player.totalBalance}$`;
@@ -111,11 +113,22 @@ function renderBalance(player) {
 }
 function renderEndGame() {
     const endGameEl = document.querySelector('.end-game');
-    const winnerEl = document.querySelector('.end-game h2 span');
+    const winnerEl = document.querySelector('.end-game');
+    console.log("file: controller.ts -> line 121 -> renderEndGame -> GAME.endOfGame.blackJack", GAME.endOfGame.blackJack);
     // const actionsEl = document.querySelector('.player-container .hands .actions')
     // console.log("file: controller.ts -> line 105 -> renderEndGame -> actionsEl", actionsEl)
     endGameEl.style.display = 'flex';
     // actionsEl.classList.add('hide')
     // actionsEl.classList.remove('actions')
-    winnerEl.innerHTML += GAME.endOfGame.winner;
+    if (GAME.endOfGame.winner !== 'push') {
+        winnerEl.innerHTML += `<h2>Winner: <span>${GAME.endOfGame.winner}</span></h2>`;
+        if (GAME.endOfGame.blackJack) {
+            console.log('hello from here');
+            winnerEl.innerHTML += `<h3>Black Jack!</h3>`;
+        }
+    }
+    else {
+        winnerEl.innerHTML += `<h2>Result: <span>PUSH</span></h2>`;
+    }
+    renderTable();
 }

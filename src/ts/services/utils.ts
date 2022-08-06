@@ -22,6 +22,7 @@ function checkSplitBtn(player: Player) {
 }
 
 function displaySum() {
+  console.log("file: utils.ts -> line 26 -> displaySum -> GAME.endOfGame.blackJack", GAME.endOfGame.blackJack)
   if (!GAME.endOfGame.blackJack) return `${PLAYER.handSum}  ${(filterAcesSum(PLAYER.hand) < 10 && PLAYER.aceCount && GAME.cardFlipped) ? ' / ' + (PLAYER.handSum - 10) : ''}`
   else return '<img src="assets/images/21.webp" alt="21"/>'
 }
