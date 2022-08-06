@@ -149,26 +149,29 @@ function fullStandAction() {
     }
 }
 function checkWinner() {
-    if (GAME.cardFlipped) {
-        if (PLAYER.handSum > 21)
-            return 'dealer';
-        if (PLAYER.handSum === 21 && PLAYER.aceCount === 1 && !DEALER.aceCount) {
-            GAME.endOfGame.blackJack = true;
-            return 'player';
-        }
-        else if (DEALER.handSum > 21)
-            return 'player';
+    if (GAME.splitMode) {
     }
     else {
-        console.log('hi');
-        if (DEALER.handSum <= 21 && DEALER.handSum > PLAYER.handSum)
-            return 'dealer';
-        if (DEALER.handSum > 21)
-            return 'player';
-        if (PLAYER.handSum > DEALER.handSum && PLAYER.handSum < 21)
-            return 'player';
-        if (DEALER.handSum >= 17 && DEALER.handSum === PLAYER.handSum)
-            return 'push';
+        if (GAME.cardFlipped) {
+            if (PLAYER.handSum > 21)
+                return 'dealer';
+            if (PLAYER.handSum === 21 && PLAYER.aceCount === 1 && !DEALER.aceCount) {
+                GAME.endOfGame.blackJack = true;
+                return 'player';
+            }
+            else if (DEALER.handSum > 21)
+                return 'player';
+        }
+        else {
+            if (DEALER.handSum <= 21 && DEALER.handSum > PLAYER.handSum)
+                return 'dealer';
+            if (DEALER.handSum > 21)
+                return 'player';
+            if (PLAYER.handSum > DEALER.handSum && PLAYER.handSum < 21)
+                return 'player';
+            if (DEALER.handSum >= 17 && DEALER.handSum === PLAYER.handSum)
+                return 'push';
+        }
     }
     // if (GAME.cardFlipped && PLAYER.handSum > 21) return 'dealer'
     // if (!GAME.cardFlipped && DEALER.sum <= 21 && DEALER.sum > PLAYER.handSum) return 'dealer'

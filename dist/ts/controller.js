@@ -110,7 +110,6 @@ function renderBalance(player) {
     currentBetEl.innerHTML = `${player.currentBet}$`;
 }
 function renderEndGame() {
-    console.log('GAME.endOfGame.winner', GAME.endOfGame.winner);
     const endGameEl = document.querySelector('.end-game');
     const winnerEl = document.querySelector('.end-game h2 span');
     // const actionsEl = document.querySelector('.player-container .hands .actions')

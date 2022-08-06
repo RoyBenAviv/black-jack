@@ -239,6 +239,7 @@ button {
 }
 
 .game-tokens h2 {
+    user-select: none;
   text-align: center;
 }
 
@@ -256,10 +257,6 @@ button {
   cursor: url(../assets/images/grab.cur), auto;
 }
 
-.tokens-draggable {
-  cursor: move;
-  cursor: -webkit-grabbing;
-}
 
 .hand-tokens .tokens-draggable {
   cursor: inherit;

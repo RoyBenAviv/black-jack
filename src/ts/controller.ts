@@ -1,5 +1,3 @@
-
-
 async function renderTable() {
   let playerHTML: string = ''
   if (GAME.splitMode) {
@@ -13,7 +11,9 @@ async function renderTable() {
       playerHTML += '</div>'
       playerHTML += `
       <div class="${i === PLAYER.split.currentHand ? 'actions' : 'hide'}">
-      <button style="display: ${PLAYER.handSum >= 21 ? 'none' : 'flex'}" onclick="onHit()"> <img src="assets/images/hit.png" alt="hit"/> HIT</button> <button onclick="onStand()"> <img src="assets/images/stand.png" alt="stand"/> STAND</button> 
+      <button style="display: ${
+        PLAYER.handSum >= 21 ? 'none' : 'flex'
+      }" onclick="onHit()"> <img src="assets/images/hit.png" alt="hit"/> HIT</button> <button onclick="onStand()"> <img src="assets/images/stand.png" alt="stand"/> STAND</button> 
       </div>
       <span class="player sum two-hands">${displaySplitSum(i)}</span>
       `
@@ -34,7 +34,7 @@ async function renderTable() {
             </div>
             <span class="player sum one-hand">${displaySum()}</span>
             `
-            playerHTML += '</div>'
+      playerHTML += '</div>'
     }
   }
   let dealerHTML = ''
@@ -55,9 +55,9 @@ async function renderTable() {
 }
 
 function renderCards() {
-  let elPlayer: HTMLElement = document.querySelector('.cards');
-  let elHands: HTMLElement = document.querySelector('.hands');
-  (function () {
+  let elPlayer: HTMLElement = document.querySelector('.cards')
+  let elHands: HTMLElement = document.querySelector('.hands')
+  ;(function () {
     let i = 0
     const interval = setInterval(function () {
       elPlayer!.innerHTML += `<img class='card' src='assets/images/cards/${PLAYER.hand[i]}.svg'>`
@@ -73,7 +73,6 @@ function renderCards() {
          </div>
          <span class="player sum one-hand">${displaySum()}</span>`
         elHands!.innerHTML += '</div>'
-
       }
     }, 600)
   })()
@@ -105,9 +104,7 @@ function renderBalance(player: Player) {
   currentBetEl.innerHTML = `${player.currentBet}$`
 }
 
-
 function renderEndGame() {
-  console.log('GAME.endOfGame.winner',GAME.endOfGame.winner);
   const endGameEl: HTMLElement = document.querySelector('.end-game')
   const winnerEl = document.querySelector('.end-game h2 span')
   // const actionsEl = document.querySelector('.player-container .hands .actions')

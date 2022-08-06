@@ -17,7 +17,8 @@ interface Game {
     cardFlipped: boolean,
     endOfGame: {
       winner: undefined | "player" | "dealer" | "push",
-      blackJack: boolean
+      blackJack: boolean,
+      splitMode: object
     },
     splitMode: boolean,
     firstDeal: boolean
